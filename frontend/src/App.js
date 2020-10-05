@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import HomeScreen from './screens/HomeScreen';
 
 const App = () => {
   return (
@@ -8,7 +9,8 @@ const App = () => {
     <Header />
 
     <main>
-    <h1>Terve</h1> 
+    <h1>Welcome to Tech-Store</h1> 
+    <HomeScreen />
     </main>
 
     <Footer />

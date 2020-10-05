@@ -6,7 +6,6 @@ const Header = () => {
         <StyledHeader>
             <H3>WEBSHOP</H3>
             <Nav>
-            
                 <Ul>
                     <Li>CART</Li>
                     <Li>SIGN IN</Li>
@@ -37,7 +36,8 @@ const StyledHeader = styled.header`
 `;
 
 const Ul = styled.ul`
-    list-style: none;margin-right: 0;
+    list-style: none;
+    margin-right: 0;
 `;
 
 const Nav = styled.nav`
@@ -60,5 +60,5 @@ const Li = styled.li`
 const H3 = styled.h3`
     margin: auto 0 auto 40px;
     display: block;
-    float: left;
+ 
 `;
