@@ -21,4 +21,5 @@ const Footter = styled.footer`
     text-align: center;
     position: fixed;
     font-family: Arial, Helvetica, sans-serif;
+    
 `;

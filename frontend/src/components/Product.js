@@ -8,11 +8,10 @@ const Product = ({ product }) => {
                 <img style={{ width: '200px', margin: '0 auto'}} src={product.image}/>
             </a>
             <Info>
-                <strong style={{padding: '10px'}}>{product.name}</strong>
-                <p>
-                    {product.description}
-                </p>
-                <h3>{product.price}€</h3>
+                <strong>{product.name}</strong>
+                <p>{product.rating} from {product.numReviews} reviews</p>
+                <h3 style={{margin: '.5rem 0'}}>{product.price}€</h3>
+                
             </Info>
         </Card>
     )
@@ -21,15 +20,13 @@ const Product = ({ product }) => {
 export default Product
 
 const Card = styled.div`
-    padding: 1rem;
-    max-width: 300px;
-    border: 1px solid #eee;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fill, , minmax(400px, 1fr));
-    justify-content: center;
+    
+    border: 1px solid #cccccc;
+    max-height: 300px;
+    max-width: 200px;
+  
 `;
 
 const Info = styled.div`
-    
+    padding: .6rem;
 `;

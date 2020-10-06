@@ -27,7 +27,7 @@ const StyledHeader = styled.header`
     font-size: 1.2rem;
     background-color: #303242;
     color: #fff;
-
+    margin-bottom: 30px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
