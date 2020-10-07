@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import Raiting from './Raiting';
 
 const Product = ({ product }) => {
     return (
@@ -9,7 +10,11 @@ const Product = ({ product }) => {
             </a>
             <Info>
                 <strong>{product.name}</strong>
-                <p>{product.rating} from {product.numReviews} reviews</p>
+                <Raiting 
+                 value={product.rating}
+                 text={`${product.numReviews}`} 
+                 
+                 />
                 <h3 style={{margin: '.5rem 0'}}>{product.price}€</h3>
                 
             </Info>
