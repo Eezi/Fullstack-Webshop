@@ -7,8 +7,8 @@ const Header = () => {
             <H3>WEBSHOP</H3>
             <Nav>
                 <Ul>
-                    <Li>CART</Li>
-                    <Li>SIGN IN</Li>
+                    <Li><I className="fas fa-shopping-cart"></I>CART</Li>
+                    <Li><I className="fas fa-user"></I>SIGN IN</Li>
                 </Ul>
             </Nav>
         </StyledHeader>
@@ -23,7 +23,7 @@ const StyledHeader = styled.header`
     top: 0;
     left: 0;
     position: fixed;
-
+    padding: .5rem;
     font-size: 1.2rem;
     background-color: #303242;
     color: #fff;
@@ -35,9 +35,14 @@ const StyledHeader = styled.header`
 
 `;
 
+const I = styled.i`
+    padding-right: .5rem;
+`;
+
 const Ul = styled.ul`
     list-style: none;
-    margin-right: 0;
+   padding: .5rem;
+    margin: 0;
 `;
 
 const Nav = styled.nav`
@@ -48,7 +53,7 @@ const Nav = styled.nav`
 
 const Li = styled.li`
     display: inline;
-    padding: 0 2.3rem;
+    padding: .5rem 2.3rem 0 2.3rem;
     
     &:hover {
         cursor: pointer;
@@ -60,5 +65,6 @@ const Li = styled.li`
 const H3 = styled.h3`
     margin: auto 0 auto 40px;
     display: block;
- 
+    color: #fff;
+    padding: .5rem;
 `;
