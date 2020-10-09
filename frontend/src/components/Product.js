@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components';
 import Raiting from './Raiting';
+import { Link } from 'react-router-dom';
 
 const Product = ({ product }) => {
     return (
         <Card>
-            <a style={{justifySelf: 'center', padding: 0}} href={`/product/${product._id}`}>
+            <Link style={{justifySelf: 'center', padding: 0}} to={`/product/${product._id}`}>
                 <img style={{ width: '200px', margin: '0 auto'}} src={product.image}/>
-            </a>
+            </Link>
             <Info>
                 <strong>{product.name}</strong>
                 <Raiting 
