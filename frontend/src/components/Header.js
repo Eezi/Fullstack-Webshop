@@ -1,16 +1,19 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import HomeScreen from '../screens/HomeScreen'
 
 const Header = () => {
     return (
         <StyledHeader>
-            <H3>WEBSHOP</H3>
+            <Link to="/"> <H3>WEBSHOP</H3></Link>
             <Nav>
                 <Ul>
-                    <Li><I className="fas fa-shopping-cart"></I>CART</Li>
-                    <Li><I className="fas fa-user"></I>SIGN IN</Li>
+                <Link to="/cart"> <Li><I className="fas fa-shopping-cart"></I>CART</Li></Link>
+                <Link to="/login">   <Li><I className="fas fa-user"></I>SIGN IN</Li></Link>
                 </Ul>
             </Nav>
+
         </StyledHeader>
     )
 }
@@ -37,6 +40,7 @@ const StyledHeader = styled.header`
 
 const I = styled.i`
     padding-right: .5rem;
+    color: #fff;
 `;
 
 const Ul = styled.ul`
@@ -54,11 +58,12 @@ const Nav = styled.nav`
 const Li = styled.li`
     display: inline;
     padding: .5rem 2.3rem 0 2.3rem;
-    
+    color: #fff;
     &:hover {
         cursor: pointer;
         text-decoration: underline;
     }
+   
 `;
 
 

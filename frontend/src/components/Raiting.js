@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Raiting = ({ value, text, color }) => {
-    console.log('value', value, 'text',text, 'color', color)
     return (
         <div className='rating'>
             <span>
@@ -60,7 +59,7 @@ const Raiting = ({ value, text, color }) => {
                 }
                 ></i>
             </span>
-            <span>{text && text}</span>
+            <span>{text && text} Reviews</span>
         </div>
     )
 }

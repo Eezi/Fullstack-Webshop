@@ -6,11 +6,14 @@ import { Link } from 'react-router-dom';
 const Product = ({ product }) => {
     return (
         <Card>
-            <Link style={{justifySelf: 'center', padding: 0}} to={`/product/${product._id}`}>
+            
                 <img style={{ width: '200px', margin: '0 auto'}} src={product.image}/>
-            </Link>
+           
             <Info>
-                <strong>{product.name}</strong>
+                <Link to={`/product/${product._id}`}>                
+                    <strong>{product.name}</strong>
+                </Link>
+
                 <Raiting 
                  value={product.rating}
                  text={`${product.numReviews}`} 
