@@ -1,11 +1,21 @@
-import React from 'react'
-import products from '../products'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import styled from 'styled-components'
-import Raiting from '../components/Raiting';
+import Raiting from '../components/Raiting'
 
 const ProductScreen = ({ match }) => {
-    const product = products.find(product => product._id === match.params.id);
-    console.log('product', product)
+    const [product, setProduct] = useState({})
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const { data } = await axios.get(`/api/products/${match.params.id}`);
+
+            setProduct(data);
+        }
+        fetchProducts();
+
+    }, []);
+
     return (
         <Container>
             <Img src={product.image}></Img>
