@@ -14,7 +14,7 @@ const ProductScreen = ({ match }) => {
         }
         fetchProducts();
 
-    }, []);
+    }, [match]);
 
     return (
         <Container>
