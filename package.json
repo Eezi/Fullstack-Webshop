@@ -9,7 +9,7 @@
     "server": "nodemon backend/server",
     "data:destroy": "node backend/seeder -d",
     "data:import": "node backend/seeder"
-   },
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Eezi/Fullstack-Webshop.git"
@@ -26,6 +26,7 @@
     "concurrently": "^5.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "mongoose": "^5.10.9"
   },
   "devDependencies": {
