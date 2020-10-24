@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { Row, Col, Form } from 'react-bootstrap'
 import Raiting from '../components/Raiting'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProductDetails } from '../actions/productActions'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ history, match }) => {
+    const [qty, setQty] = useState(0)
     const dispatch = useDispatch()
 
     const productDetails = useSelector(state => state.productDetails)
@@ -15,6 +17,10 @@ const ProductScreen = ({ match }) => {
     useEffect(() => {
         dispatch(listProductDetails(match.params.id))
     }, [dispatch, match]);
+
+    const addToCartHandler = () => {
+        history.push(`/cart/${match.params.id}?qty=${qty}`)
+    }
 
     return (
         <Container>
@@ -34,8 +40,27 @@ const ProductScreen = ({ match }) => {
                 <p style={{marginTop: '1rem'}}>{product.price} €</p>
                 <hr/>
                 <p>{product.countInStock < 0 ? 'Out of stock' : 'In stock'}</p>
+                <hr />
+                {product.countInStock > 0 && (
+                <Row>
+                    <Col>Qty</Col>
+                    <Col>
+                <Form.Control
+                    as="select"
+                    value={qty}
+                    onChange={(e) => setQty(e.target.value)}
+                    >
+                    {[...Array(product.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                        </option>
+                    ))}
+                </Form.Control>
+                </Col>
+                </Row>
+                ) }
                 <hr/>
-                <Button>ADD TO CART</Button>
+                <Button onClick={addToCartHandler}>ADD TO CART</Button>
              </Box>
              </>
              )}
