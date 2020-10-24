@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product'
+import { listProducts } from '../actions/productActions';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const HomeScreen = () => {
-    const [products, setProducts] = useState([])
+    const dispatch = useDispatch();
+
+    const productList = useSelector(state => state.productList);
+    const { loading, error, products } = productList;
+
     useEffect(() => {
-        const fetchProducts = async () => {
-            const { data } = await axios.get('/api/products');
+        dispatch(listProducts())
+    }, [dispatch]);
 
-            setProducts(data);
-        }
-        fetchProducts();
-
-    }, []);
     return (
         <Container>
        <H1>LATEST PRODUCTS</H1>
+    {loading ? <Loader /> : error ? <Message variant="danger">{error}</Message> : 
+    
         <Div>
         
        
@@ -25,6 +29,7 @@ const HomeScreen = () => {
             ))}
             
         </Div>
+    }
         </Container>
     )
 }
