@@ -1,40 +1,45 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import styled from 'styled-components'
 import Raiting from '../components/Raiting'
+import { useDispatch, useSelector } from 'react-redux'
+import { listProductDetails } from '../actions/productActions'
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const ProductScreen = ({ match }) => {
-    const [product, setProduct] = useState({})
+    const dispatch = useDispatch()
+
+    const productDetails = useSelector(state => state.productDetails)
+    const { product, error, loading } = productDetails
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            const { data } = await axios.get(`/api/products/${match.params.id}`);
-
-            setProduct(data);
-        }
-        fetchProducts();
-
-    }, [match]);
+        dispatch(listProductDetails(match.params.id))
+    }, [dispatch, match]);
 
     return (
         <Container>
-            <Img src={product.image}></Img>
-            <Info>
-                <p>{product.name}</p>
-                <hr />
-                <Raiting value={product.rating}  text={`${product.numReviews}`} />  
-                <hr />
-                <strong>{product.price} €</strong>
+            {loading ? <Loader /> : error ? <Message variant="danger">{error}</Message> : (
+            <>
+             <Img src={product.image}></Img>
+             <Info>
+                 <p>{product.name}</p>
+                 <hr />
+                 <Raiting value={product.rating}  text={`${product.numReviews}`} />  
+                 <hr />
+                 <strong>{product.price} €</strong>
+                 <hr/>
+                 <p>{product.description}</p>
+             </Info>
+             <Box>
+                <p style={{marginTop: '1rem'}}>{product.price} €</p>
                 <hr/>
-                <p>{product.description}</p>
-            </Info>
-            <Box>
-    <p style={{marginTop: '1rem'}}>{product.price} €</p>
-    <hr/>
-    <p>{product.countInStock < 0 ? 'Out of stock' : 'In stock'}</p>
-    <hr/>
-    <Button>ADD TO CART</Button>
-            </Box>
+                <p>{product.countInStock < 0 ? 'Out of stock' : 'In stock'}</p>
+                <hr/>
+                <Button>ADD TO CART</Button>
+             </Box>
+             </>
+             )}
+           
         </Container>
     )
 }
