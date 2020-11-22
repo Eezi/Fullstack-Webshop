@@ -1,4 +1,9 @@
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL } from "../constants/userConstant";
+import {
+  USER_LOGIN_REQUEST,
+  USER_LOGIN_SUCCESS,
+  USER_LOGIN_FAIL,
+  USER_LOGIN_LOGOUT,
+} from "../constants/userConstant";
 import axios from "axios";
 
 export const login = (email, password) => async (dispatch) => {
@@ -20,18 +25,23 @@ export const login = (email, password) => async (dispatch) => {
     );
 
     dispatch({
-        type: USER_LOGIN_SUCCESS,
-        payload: data
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data))
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
-        type: USER_LOGIN_FAIL,
-        payload:
+      type: USER_LOGIN_FAIL,
+      payload:
         error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+          ? error.response.data.message
+          : error.message,
     });
   }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
+  dispatch({ type: USER_LOGIN_LOGOUT });
 };
