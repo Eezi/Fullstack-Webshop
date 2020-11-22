@@ -27,15 +27,15 @@ const Header = () => {
           <Link to="/cart">
             {" "}
             <Li>
-              <I className="fas fa-shopping-cart"></I>CART
+              <I className="fas fa-shopping-cart"></I>Cart
             </Li>
           </Link>
             {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                     <LinkContainer to="/profile">
-                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                        <NavDropdown.Item style={{color: '#fff'}} >Profile</NavDropdown.Item>
                     </LinkContainer>
-                    <NavDropdown.Item onClick={logoutHandler}>
+                    <NavDropdown.Item  onClick={logoutHandler}>
                         Logout
                     </NavDropdown.Item>
                 </NavDropdown>
@@ -43,7 +43,7 @@ const Header = () => {
           <Link to="/login">
             {" "}
             <Li>
-              <I className="fas fa-user"></I>SIGN IN
+              <I className="fas fa-user"></I>Sign In
             </Li>
           </Link>
              }
@@ -82,6 +82,7 @@ const Ul = styled.ul`
   list-style: none;
   padding: 0.5rem;
   margin: 0;
+  color: #fff;
 `;
 
 const Nav = styled.nav`
