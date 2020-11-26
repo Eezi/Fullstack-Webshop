@@ -5,8 +5,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import FormContainer from "../components/FormContainer";
-import { register } from "../actions/userActions";
+import { getUserDetails, login } from "../actions/userActions";
 
 const ProfileScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -15,16 +14,26 @@ const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState(null);
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
-  const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, userInfo } = userDetails;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userInfo) {
-      history.push(redirect);
+    if (!userInfo) {
+      history.push('/login');
+    } else {
+        if(!userLogin.name) {
+            dispatch(getUserDetails('profile'))
+        } else {
+            setName(user.name);
+            setEmail(user.email);
+        }
     }
-  }, [history, userInfo, redirect]);
+  }, [history, userInfo ]);
 
 
   const submitHandler = (e) => {
