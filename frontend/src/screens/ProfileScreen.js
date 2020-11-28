@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, login } from "../actions/userActions";
+import FormContainer from "../components/FormContainer";
 
 const ProfileScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const ProfileScreen = ({ location, history }) => {
   const [message, setMessage] = useState(null);
 
   const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, userInfo } = userDetails;
+  const { loading, error, user } = userDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -26,14 +27,14 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push('/login');
     } else {
-        if(!userLogin.name) {
+        if(!user?.name) {
             dispatch(getUserDetails('profile'))
         } else {
             setName(user.name);
             setEmail(user.email);
         }
     }
-  }, [history, userInfo ]);
+  }, [dispatch, history, userInfo, user ]);
 
 
   const submitHandler = (e) => {
@@ -41,13 +42,15 @@ const ProfileScreen = ({ location, history }) => {
     if(password !== confirmPassword) {
         setMessage('Passwords do not match')
     } else {
-        dispatch(register(name, email, password));
+        //dispatch(register(name, email, password));
     }
   };
 
+  console.log('name', name, 'email', email)
   return (
-    <FormContainer>
-      <h1>Profile</h1>
+    <Row>
+    <Col md={3}>
+    <h1>User Profile</h1>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
@@ -94,19 +97,16 @@ const ProfileScreen = ({ location, history }) => {
         </Form.Group>
 
         <Button type="submit" varian="primary">
-          Register
+          Update
         </Button>
       </Form>
 
-      <Row className="py-3">
-        <Col>
-          Have an Account?{" "}
-          <Link to={redirect ? `login?redirect=${redirect}` : "/login"}>
-            Login
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+    </Col> 
+    <Col md={9}>
+      <h1>Orders</h1>
+    </Col>
+
+    </Row>
   );
 };
 
