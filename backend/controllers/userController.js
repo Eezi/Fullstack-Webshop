@@ -73,9 +73,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //Update user profile
 //Route PUT /api/users/profile
 //Private
-const updateUserProfile = asyncHandler(async (req, res) => {
+const updateUserProfileProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
-
   if (user) {
     user.name = req.body.name || user.name,
     user.email = req.body.email || user.email
@@ -98,4 +97,4 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   res.send("Success!");
 });
 
-export { authUser, getUserProfile, registerUser, updateUserProfile };
+export { authUser, getUserProfile, registerUser, updateUserProfileProfile };

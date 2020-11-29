@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
-import { Logout, logout } from '../actions/userActions';
+import { logout } from '../actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import { NavDropdown } from "react-bootstrap";
 
@@ -33,7 +33,7 @@ const Header = () => {
             {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                     <LinkContainer to="/profile">
-                        <NavDropdown.Item style={{color: '#fff'}} >Profile</NavDropdown.Item>
+                        <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
                     <NavDropdown.Item  onClick={logoutHandler}>
                         Logout
@@ -57,7 +57,6 @@ export default Header;
 
 const StyledHeader = styled.header`
   font-family: Arial, Helvetica, sans-serif;
-
   top: 0;
   left: 0;
   position: fixed;
@@ -73,14 +72,14 @@ const StyledHeader = styled.header`
 `;
 
 const I = styled.i`
-  padding-right: 0.5rem;
+  
   color: #fff;
 `;
 
 const Ul = styled.ul`
   display: flex;
   list-style: none;
-  padding: 0.5rem;
+  
   margin: 0;
   color: #fff;
 `;
@@ -91,7 +90,7 @@ const Nav = styled.nav`
 
 const Li = styled.li`
   display: inline;
-  padding: 0.5rem 2.3rem 0 2.3rem;
+  
   color: #fff;
   &:hover {
     cursor: pointer;
