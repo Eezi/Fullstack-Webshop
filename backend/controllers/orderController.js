@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import Order from "../models/productModel.js";
+import Order from "../models/orderModel.js";
 
 // Create new Order
 // POST /api/orders
@@ -37,4 +37,19 @@ const addOrderItems = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems }
+
+// Get order by id
+// GET /api/order/order._id
+// Private
+const getOrderById = asyncHandler(async (req, res) => {
+  const order = await await Order.findById(req.params.id).populate('user', 'name email');
+
+  if(order){
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+});
+
+export { addOrderItems, getOrderById }
