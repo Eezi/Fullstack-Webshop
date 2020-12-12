@@ -9,7 +9,8 @@ import { cartReducer } from "./reducers/cartReducers";
 import {
   orderCreateReducer,
   orderDetaildReducer,
-  orderPayReducer
+  orderPayReducer,
+  myOrdersReducers
 } from "./reducers/orderReducers";
 import {
   userLoginReducer,
@@ -28,7 +29,8 @@ const reducer = combineReducers({
   userUpdate: updateUserProfileRedcuer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetaildReducer,
-  orderPay: orderPayReducer
+  orderPay: orderPayReducer,
+  myOrders: myOrdersReducers
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
@@ -47,6 +49,10 @@ const paymentMethodFromStorage = localStorage.getItem("paymentMethod")
   ? JSON.parse(localStorage.getItem("paymentMethod"))
   : {};
 
+  const myOrdersFromStorage = localStorage.getItem("myOrders")
+  ? JSON.parse(localStorage.getItem("myOrders"))
+  : {};
+
 const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
@@ -54,6 +60,7 @@ const initialState = {
     paymentMethod: paymentMethodFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },
+  myOrders: myOrdersFromStorage
 };
 
 const middleware = [thunk];
