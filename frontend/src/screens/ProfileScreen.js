@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import { getMyOrders } from '../actions/orderActions';
 
 const ProfileScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -19,6 +20,9 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const orderMyList = useSelector((state) => state.myOrders);
+  const { loading: loadingOrder, error: errorOrders, orders } = orderMyList;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,6 +31,7 @@ const ProfileScreen = ({ location, history }) => {
     } else {
       if (!user?.name) {
         dispatch(getUserDetails('profile'));
+        dispatch(getMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
