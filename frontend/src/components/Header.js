@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
-import { logout } from '../actions/userActions';
-import { LinkContainer } from 'react-router-bootstrap';
+import { logout } from "../actions/userActions";
+import { LinkContainer } from "react-router-bootstrap";
 import { NavDropdown } from "react-bootstrap";
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
-}
+  };
   return (
     <StyledHeader>
       <Link to="/">
@@ -30,23 +30,36 @@ const Header = () => {
               <I className="fas fa-shopping-cart"></I>Cart
             </Li>
           </Link>
-            {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
-                    <LinkContainer to="/profile">
-                        <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Item  onClick={logoutHandler}>
-                        Logout
-                    </NavDropdown.Item>
-                </NavDropdown>
-            ) : 
-          <Link to="/login">
-            {" "}
-            <Li>
-              <I className="fas fa-user"></I>Sign In
-            </Li>
-          </Link>
-             }
+          {userInfo ? (
+            <NavDropdown title={userInfo.name} id="username">
+              <LinkContainer to="/profile">
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+              </LinkContainer>
+              <NavDropdown.Item onClick={logoutHandler}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
+          ) : (
+            <Link to="/login">
+              {" "}
+              <Li>
+                <I className="fas fa-user"></I>Sign In
+              </Li>
+            </Link>
+          )}
+          {userInfo && userInfo.isAdmin && (
+            <NavDropdown title="Admin" id="adminmenu">
+              <LinkContainer to="/admin/userlist">
+                <NavDropdown.Item>Users</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/admin/productlist">
+                <NavDropdown.Item>Products</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/admin/orderlist">
+                <NavDropdown.Item>Orders</NavDropdown.Item>
+              </LinkContainer>
+            </NavDropdown>
+          )}
         </Ul>
       </Nav>
     </StyledHeader>
@@ -72,14 +85,13 @@ const StyledHeader = styled.header`
 `;
 
 const I = styled.i`
-  
   color: #fff;
 `;
 
 const Ul = styled.ul`
   display: flex;
   list-style: none;
-  
+
   margin: 0;
   color: #fff;
 `;
@@ -90,7 +102,7 @@ const Nav = styled.nav`
 
 const Li = styled.li`
   display: inline;
-  
+
   color: #fff;
   &:hover {
     cursor: pointer;
