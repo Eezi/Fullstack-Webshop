@@ -73,7 +73,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //Update user profile
 //Route PUT /api/users/profile
 //Private
-const updateUserProfileProfile = asyncHandler(async (req, res) => {
+const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user) {
     user.name = req.body.name || user.name,
@@ -120,4 +120,43 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerUser, updateUserProfileProfile, getUsers, deleteUser };
+// Get user by ID 
+// Route GET /api/users/:id
+// Private/Admin
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password');
+
+  if(user){
+    res.json(user);
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+});
+
+// Update user 
+// Route PUT /api/users/:id
+// Admin
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    user.name = req.body.name || user.name,
+    user.email = req.body.email || user.email
+    user.isAdmin = req.body.isAdmin
+
+    const updatedUser = await user.save();
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+
+  } else {
+    res.status(404);
+    throw new Error("Invalid email or password");
+  }
+  res.send("Success!");
+});
+
+export { authUser, getUserProfile, registerUser, updateUserProfile, getUsers, deleteUser, getUserById, updateUser };
