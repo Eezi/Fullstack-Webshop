@@ -21,7 +21,6 @@ const App = () => {
     <Header />
 
     <main>
-      <h1 style={{paddingTop: '.8rem'}}>Welcome to Tech-Store</h1> 
       
       <Switch>
         <Route path="/product/:id" component={ProductScreen} />
