@@ -19,7 +19,7 @@ const Product = ({ product }) => {
                  text={`${product.numReviews}`} 
                  
                  />
-                <h3 style={{margin: '.5rem 0'}}>{product.price}€</h3>
+                <h5 style={{margin: '.5rem 0'}}>{product.price}€</h5>
                 
             </Info>
         </Card>
@@ -31,7 +31,7 @@ export default Product
 const Card = styled.div`
     
     border: 1px solid #cccccc;
-    max-height: 300px;
+    max-height: 2800px;
     max-width: 200px;
   
 `;
