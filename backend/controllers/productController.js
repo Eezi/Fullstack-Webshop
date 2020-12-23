@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({});
@@ -39,6 +40,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 const createProduct = asyncHandler(async (req, res) => {
   const product = new Product({
     name: "Sample name",
+    user: req.user._id,
     description: "Sample description",
     price: 0,
     countInStock: 0,
