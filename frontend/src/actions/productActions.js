@@ -142,7 +142,6 @@ export const updateProduct = (product) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`
       },
     };
-
     const { data } = await axios.put(
       `/api/products/${product._id}`,
       product,
