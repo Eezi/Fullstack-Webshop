@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [countInStock, setCountInStock] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
-  const [message, setMessage] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -52,8 +53,42 @@ const ProductEditScreen = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateProduct({ _id: product._id, name, price, description, countInStock, brand, category, image }));
+    dispatch(
+      updateProduct({
+        _id: product._id,
+        name,
+        price,
+        description,
+        countInStock,
+        brand,
+        category,
+        image,
+      })
+    );
   };
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+      const { data } = await axios.post('/api/upload', formData, config)
+      console.log('data', data)
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.log(error); 
+      setUploading(false);
+    }
+  }
 
   return (
     <>
@@ -140,6 +175,13 @@ const ProductEditScreen = ({ match, history }) => {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
+              <Form.File
+                id="image-file"
+                label="Choose File"
+                custom
+                onChange={uploadFileHandler}
+              ></Form.File>
+              {uploading && <Loader />}
             </Form.Group>
 
             <Button type="submit" varian="primary">

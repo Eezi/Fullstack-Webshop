@@ -7,7 +7,7 @@ const Product = ({ product }) => {
     return (
         <Card>
             
-                <img style={{ width: '200px', margin: '0 auto'}} src={product.image}/>
+                <img style={{ width: '200px', maxHeight: '160px', margin: '0 auto'}} src={product.image}/>
            
             <Info>
                 <Link to={`/product/${product._id}`}>                
