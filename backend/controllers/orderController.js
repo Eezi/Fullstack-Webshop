@@ -29,6 +29,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       taxPrice,
       shippingPrice,
       totalPrice,
+      createdAt: new Date()
     });
 
     const createdOrder = await order.save();
@@ -89,4 +90,18 @@ const getMyOrders = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders }
+// Get all orders
+// GET /api/orders
+// Admin 
+const getAllOrders = asyncHandler(async (req, res) => {
+  const orders = await await Order.find({}).populate('user', 'id name');
+
+  if(orders){
+    res.json(orders);
+  } else {
+    res.status(404);
+    throw new Error('Orders not found');
+  }
+});
+
+export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders, getAllOrders }
