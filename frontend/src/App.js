@@ -41,6 +41,7 @@ const App = () => {
         <Route path="/register" component={RegisterScreen} />
         <Route path="/profile" component={ProfileScreen} />
         <Route path="/cart/:id?" component={CartScreen} />
+        <Route path="/search/:keyword" component={HomeScreen} />
         <Route exact path="/" component={HomeScreen} />
       </Switch>
       </Container>

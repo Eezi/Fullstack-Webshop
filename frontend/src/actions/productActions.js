@@ -20,11 +20,11 @@ import {
 } from '../constants/productConstants.js'
 import axios from 'axios'
 
-export const listProducts = () => async (dispatch) => {
+export const listProducts = (keyword = '') => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
-        const { data } = await axios.get('/api/products')
+        const { data } = await axios.get(`/api/products?keyword=${keyword}`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS, 
@@ -185,8 +185,8 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
         Authorization: `Bearer ${userInfo.token}`
       },
     };
-    const { data } = await axios.put(
-      `/api/products/${productId}`,
+    const { data } = await axios.post(
+      `/api/products/${productId}/reviews`,
       review,
       config
     );
