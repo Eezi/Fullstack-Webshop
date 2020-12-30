@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form, ListGroup } from "react-bootstrap";
 import Raiting from "../components/Raiting";
 import { useDispatch, useSelector } from "react-redux";
-import { listProductDetails } from "../actions/productActions";
+import {
+  listProductDetails,
+  createProductReview,
+} from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
   const { product, error, loading } = productDetails;
+
+  const productReviewCreate = useSelector((state) => state.productReviewCreate);
+  const {
+    error: errorProductReview,
+    success: successProductReview,
+  } = productReviewCreate;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
@@ -71,6 +86,22 @@ const ProductScreen = ({ history, match }) => {
           </Box>
         </>
       )}
+      <Row>
+        <Col md={6}>
+          <h2>Reviews</h2>
+          {product.reviews.length === 0 && <Message>No reviews</Message>}
+          <ListGroup variant="flush">
+            {product.reviews.map(review => (
+              <ListGroup.Item key={review._id}>
+                <strong>{review.name}</strong>
+                <Raiting value={review.rating} />
+            <p>{review.createdAt.substring(0, 10)}</p>
+            <p>{review.comment}</p>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Col>
+      </Row>
     </Container>
   );
 };
