@@ -10,12 +10,15 @@ import {
   deleteProduct,
   createProduct,
 } from "../actions/productActions";
+import Paginate from '../components/Paginate';
 
-const ProductListScreen = ({ history }) => {
+const ProductListScreen = ({ history, match }) => {
+  const keyword = match.params.keyword;
+  const pageNumber = match.params.pageNumber || 1;
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -43,7 +46,7 @@ const ProductListScreen = ({ history }) => {
     if(successCreate) {
       history.push(`/admin/product/${createdProduct._id}/edit`)
     } else {
-      dispatch(listProducts());
+      dispatch(listProducts('', pageNumber));
     }
   }, [dispatch, history, successDelete, successCreate, createProduct, userInfo]);
 
@@ -79,6 +82,7 @@ const ProductListScreen = ({ history }) => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
+        <>
         <Table striped bordered responsive className="table-sm">
           <thead>
             <tr>
@@ -115,6 +119,8 @@ const ProductListScreen = ({ history }) => {
             ))}
           </tbody>
         </Table>
+        <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
+        </>
       )}
     </>
   );
