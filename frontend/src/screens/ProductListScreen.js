@@ -13,7 +13,6 @@ import {
 import Paginate from '../components/Paginate';
 
 const ProductListScreen = ({ history, match }) => {
-  const keyword = match.params.keyword;
   const pageNumber = match.params.pageNumber || 1;
   const dispatch = useDispatch();
 
@@ -48,7 +47,7 @@ const ProductListScreen = ({ history, match }) => {
     } else {
       dispatch(listProducts('', pageNumber));
     }
-  }, [dispatch, history, successDelete, successCreate, createProduct, userInfo]);
+  }, [dispatch, history, successDelete, successCreate, createProduct, pageNumber, userInfo]);
 
   const handleproductDelete = (productId) => {
     if (window.confirm("Are you sure?")) {
@@ -119,7 +118,7 @@ const ProductListScreen = ({ history, match }) => {
             ))}
           </tbody>
         </Table>
-        <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
+        <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>

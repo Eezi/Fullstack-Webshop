@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { Container, Pagination } from "react-bootstrap";
 import Paginate from '../components/Paginate';
+import ProductCaroucel from "../components/ProductCaroucel";
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -23,6 +24,7 @@ const HomeScreen = ({ match }) => {
 
   return (
     <Container>
+      {!keyword && <ProductCaroucel />}
       <H1>LATEST PRODUCTS</H1>
       {loading ? (
         <Loader />
