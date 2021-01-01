@@ -6,8 +6,10 @@ import { listProducts } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { Container, Pagination } from "react-bootstrap";
-import Paginate from '../components/Paginate';
+import Paginate from "../components/Paginate";
 import ProductCaroucel from "../components/ProductCaroucel";
+import Meta from "../components/Meta";
+import { Link } from "react-router-dom";
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -24,7 +26,14 @@ const HomeScreen = ({ match }) => {
 
   return (
     <Container>
-      {!keyword && <ProductCaroucel />}
+      <Meta />
+      {!keyword ? (
+        <ProductCaroucel />
+      ) : (
+        <Link to="/" className="btn btn-light">
+          Go Back
+        </Link>
+      )}
       <H1>LATEST PRODUCTS</H1>
       {loading ? (
         <Loader />
@@ -37,7 +46,7 @@ const HomeScreen = ({ match }) => {
           ))}
         </Div>
       )}
-      <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
+      <Paginate pages={pages} page={page} keyword={keyword ? keyword : ""} />
     </Container>
   );
 };
