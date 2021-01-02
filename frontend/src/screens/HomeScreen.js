@@ -5,11 +5,12 @@ import Product from "../components/Product";
 import { listProducts } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { Container, Pagination } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Paginate from "../components/Paginate";
 import ProductCaroucel from "../components/ProductCaroucel";
 import Meta from "../components/Meta";
 import { Link } from "react-router-dom";
+import { Row, Col } from 'react-bootstrap'
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -25,7 +26,7 @@ const HomeScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
 
   return (
-    <Container>
+    <>
       <Meta />
       {!keyword ? (
         <ProductCaroucel />
@@ -47,7 +48,7 @@ const HomeScreen = ({ match }) => {
         </Div>
       )}
       <Paginate pages={pages} page={page} keyword={keyword ? keyword : ""} />
-    </Container>
+    </>
   );
 };
 

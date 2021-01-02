@@ -7,6 +7,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { getMyOrders } from '../actions/orderActions';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstant';
 
 const ProfileScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -21,16 +22,19 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
+
   const orderMyList = useSelector((state) => state.myOrders);
   const { loading: loadingOrders, error: errorOrders, myOrders } = orderMyList;
 
   const dispatch = useDispatch();
-  console.log('mikäs', orderMyList)
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user?.name) {
+      if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails('profile'));
         dispatch(getMyOrders());
       } else {
@@ -38,7 +42,7 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
-  }, [dispatch, history, userInfo, user ]);
+  }, [dispatch, history, userInfo, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();

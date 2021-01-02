@@ -31,7 +31,6 @@ export default Product
 const Card = styled.div`
     
     border: 1px solid #cccccc;
-    max-height: 2800px;
     max-width: 200px;
   
 `;

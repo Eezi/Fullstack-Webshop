@@ -61,11 +61,12 @@ const CartScreen = ({ match, location, history }) => {
                     <Form.Control
                       as="select"
                       value={item.qty}
-                      onChange={(e) =>
+                      onChange={(e) =>{
+                        console.log('item', e.target.value)
                         dispatch(
                           addToCart(item.product, Number(e.target.value))
                         )
-                      }
+                      }}
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>
