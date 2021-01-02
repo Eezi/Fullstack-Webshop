@@ -7,7 +7,7 @@ const Product = ({ product }) => {
     return (
         <Card>
             
-                <img style={{ width: '200px', maxHeight: '160px', margin: '0 auto'}} src={product.image}/>
+                <img style={{ maxWidth: '198px', maxHeight: '160px', margin: '0 auto'}} src={product.image}/>
            
             <Info>
                 <Link to={`/product/${product._id}`}>                
@@ -30,7 +30,7 @@ export default Product
 
 const Card = styled.div`
     
-    border: 1px solid #cccccc;
+    border: 1px solid #47484F;
     max-width: 200px;
   
 `;

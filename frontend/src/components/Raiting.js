@@ -68,8 +68,6 @@ Raiting.defaultProps = {
     color: '#f8e825'
 }
 Raiting.propTypes = {
-    //value: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
     color: PropTypes.string,
 }
 export default Raiting;

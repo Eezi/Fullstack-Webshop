@@ -11,7 +11,7 @@ import {
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
-import Meta from '../components/Meta';
+import Meta from "../components/Meta";
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -58,7 +58,7 @@ const ProductScreen = ({ history, match }) => {
           <Message variant="danger">{error}</Message>
         ) : (
           <>
-          <Meta title={product.name} />
+            <Meta title={product.name} />
             <Img src={product.image}></Img>
             <Info>
               <p>{product.name}</p>
@@ -81,9 +81,7 @@ const ProductScreen = ({ history, match }) => {
                     <Form.Control
                       as="select"
                       value={qty}
-                      onChange={(e) => {
-                        setQty(e.target.value);
-                      }}
+                      onChange={(e) => setQty(e.target.value)}
                     >
                       {[...Array(product.countInStock).keys()].map((x) => (
                         <option key={x + 1} value={x + 1}>

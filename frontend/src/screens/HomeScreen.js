@@ -55,15 +55,10 @@ const HomeScreen = ({ match }) => {
 export default HomeScreen;
 
 const Div = styled.div`
-  max-height: 550px;
-
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 1rem;
-  grid-template-rows: auto;
-
-  z-index: 1;
 `;
 
 /*const Container = styled.div`

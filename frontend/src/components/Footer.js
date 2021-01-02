@@ -4,10 +4,10 @@ import { Container, Row, Col } from "react-bootstrap";
 
 function Footer() {
   return (
-    <Footter bg="dark" variant="dark">
+    <Footter >
       <Container>
         <Row>
-          <Col className="text-center py-3">Copyright &copy; TechShop</Col>
+          <Col className="text-center py-3"><p>Copyright &copy; TechShop</p></Col>
         </Row>
       </Container>
     </Footter>
@@ -17,7 +17,7 @@ function Footer() {
 export default Footer;
 
 const Footter = styled.footer`
-  background-color: #343a40;
+  background: transparent;
   bottom: 0;
   position: fixed;
   width: 100%;  

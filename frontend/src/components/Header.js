@@ -17,7 +17,7 @@ const Header = () => {
   };
   return (
 <header>
-      <Navbar style={{padding: '.7rem 1rem'}} bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar style={{padding: '.7rem 1rem', background: '#222629'}} variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>TECHSHOP</Navbar.Brand>
